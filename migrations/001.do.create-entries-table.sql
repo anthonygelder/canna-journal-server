@@ -4,6 +4,6 @@ CREATE TABLE entries (
     farm TEXT NOT NULL,
     rating INTEGER NOT NULL,
     note TEXT,
+    likes INTEGER,
     date_created TIMESTAMP NOT NULL DEFAULT now()
 );
-
