@@ -11,7 +11,7 @@ const EntriesService = {
 
     getById(db, entry_id) {
         return EntriesService.getAllEntries(db)
-            .where('thg.id', entry_id)
+            .where('id', entry_id)
             .first()
     },
 
@@ -23,6 +23,18 @@ const EntriesService = {
             .then(([entry]) => entry)
             .then(entry =>
                 EntriesService.getById(db, entry.id))
+    },
+
+    deleteEntry(db, id) {
+        return db('entries')
+            .where({ id })
+            .delete()
+    },
+
+    update(db, id, newEntryFields) {
+        return db('entries')
+            .where({ id })
+            .update(newEntryFields)
     }
 }
 

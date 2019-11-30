@@ -21,6 +21,16 @@ entriesRouter
     .get((req, res) => { 
         res.json(res.entry)
     })
+    .delete((req, res, next) => {
+        EntriesService.deleteEntry(
+            req.app.get('db'),
+            req.params.entry_id
+        )
+        .then(numRowsAffected => {
+            res.status(204).end()
+        })
+        .catch(next)
+    })
 
 entriesRouter
     .route('/')
