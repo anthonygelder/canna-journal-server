@@ -31,6 +31,28 @@ entriesRouter
         })
         .catch(next)
     })
+    .patch(jsonBodyParser, (req, res, next) => {
+        const { strain, farm, rating, note } = req.body
+        const entryToUpdate = { strain, farm, rating, note }
+        console.log(req.body)
+        const numberOfValues = Object.values(entryToUpdate).filter(Boolean).length
+        if (numberOfValues === 0)
+            return res.status(400).json({
+                error: {
+                message: `Request body must contain either 'note_name', 'content'`
+                }
+            })
+        
+            EntriesService.updateEntry(
+            req.app.get('db'),
+            req.params.entry_id,
+            entryToUpdate
+            )
+            .then(numRowsAffected => {
+                res.status(204).end()
+            })
+            .catch(next)
+    })
 
 entriesRouter
     .route('/')

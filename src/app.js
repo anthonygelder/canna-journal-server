@@ -7,8 +7,16 @@ const { NODE_ENV } = require('./config')
 const entriesRouter = require('./entries/entries-router')
 // const authRouter = require('./auth/auth-router')
 // const usersRouter = require('./users/users-router')
+const cors = require('cors');
+const {CLIENT_ORIGIN} = require('./config');
 
 const app = express()
+
+app.use(
+  cors({
+      origin: CLIENT_ORIGIN
+  })
+);
 
 app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
   skip: () => NODE_ENV === 'test',
