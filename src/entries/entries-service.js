@@ -3,7 +3,6 @@
 
 const EntriesService = {
     getAllEntries(db) {
-        console.log('DB', db)
         return db
             .from('entries')
             .select('*')

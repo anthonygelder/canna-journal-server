@@ -34,7 +34,6 @@ entriesRouter
     .patch(jsonBodyParser, (req, res, next) => {
         const { strain, farm, rating, note } = req.body
         const entryToUpdate = { strain, farm, rating, note }
-        console.log(req.body)
         const numberOfValues = Object.values(entryToUpdate).filter(Boolean).length
         if (numberOfValues === 0)
             return res.status(400).json({
