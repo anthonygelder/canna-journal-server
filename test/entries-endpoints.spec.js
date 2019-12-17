@@ -2,13 +2,13 @@ const knex = require('knex')
 const app = require('../src/app')
 const helpers = require('./test-helpers')
 
-describe.only('Entries endpoint', function() {
+describe('Entries endpoint', function() {
   let db
 
   const {
     testUsers,
     testEntries
-  } = helpers.makeEntriesFixtures()
+  } = helpers.makeEntriesFixtures()  
 
   before('make knex instance', () => {
     db = knex({
@@ -22,7 +22,7 @@ describe.only('Entries endpoint', function() {
 
   before('cleanup', () => helpers.cleanTables(db))
 
-  afterEach('cleanup', () => helpers.cleanTables(db))
+  // afterEach('cleanup', () => helpers.cleanTables(db))
 
   describe(`GET /api/entries`, () => {
     context(`Given no entries`, () => {
@@ -65,7 +65,7 @@ describe.only('Entries endpoint', function() {
       })
     })
 
-    context('Given there are entries in the database', () => {
+    context(`Given there are entries in the database`, () => {
       beforeEach(`insert entries`, () => {
         helpers.seedEntriesTables(
           db,
@@ -76,6 +76,7 @@ describe.only('Entries endpoint', function() {
 
       it(`responds with 200 and the specified entry`, () => {
         const entryId = 2
+        
         const expectedEntry = helpers.makeExpectedEntry(
           testUsers,
           testEntries[entryId - 1]
@@ -88,7 +89,7 @@ describe.only('Entries endpoint', function() {
     })
   })
 
-  describe.only(`POST /api/entries`, () => {
+  describe(`POST /api/entries`, () => {
     context('insert new entry into db', () => {
 
       beforeEach(`insert entries`, () => {
@@ -101,10 +102,11 @@ describe.only('Entries endpoint', function() {
         
         it(`creates an entry, responds with 201 and the new entry`, function() {
           const newEntry = {
-            strain: "Strain 2",
-            farm: "Cool Farm 2",
-            rating: 2,
-            note: "note note",
+            "id": 9999999,
+            "strain": "Strain 2",
+            "farm": "Cool Farm 2",
+            "rating": 2,
+            "note": "note note",
           }
           return supertest(app)
           .post('/api/entries')
@@ -112,10 +114,60 @@ describe.only('Entries endpoint', function() {
           .expect(201)
           .expect(res => {
             expect(res.body).to.have.property('id')
-            expect(res.body.strain).to.eql(newComment.strain)
-            expect(res.body.farm).to.eql(newComment.farm)
+            expect(res.body.strain).to.eql(newEntry.strain)
+            expect(res.body.farm).to.eql(newEntry.farm)
           })
         })
       })
+  })
+
+  describe(`DELETE /api/entries/:entry_id`, () => {
+    context('Given there are entries in the database', () => {
+    beforeEach(`insert entries`, () => {
+      helpers.seedEntriesTables(
+        db,
+        testUsers,
+        testEntries
+      )
     })
+
+    it('responds with 204 and removes the entry', () => {
+      const idToRemove = 2
+      // const expectedEntries = testEntries.filter(entry => entry.id !== idToRemove)
+      return supertest(app)
+          .delete(`/api/entries/${idToRemove}`)
+          .expect(204)
+      })
+    })
+  })
+
+  describe(`PATCH /api/entries/:entry_id`, () => {
+    context('Given there are entries in the database', () => {
+    beforeEach(`insert entries`, () => {
+      helpers.seedEntriesTables(
+        db,
+        testUsers,
+        testEntries
+      )
+    })
+
+    it('responds with 204 and updates the entry', () => {
+      const idToUpdate = 1
+      const updateEntry = {
+        "strain": "update",
+        "farm": "update",
+        "rating": 1,
+        "note": "update",
+      }
+      // const expectedEntry = {
+      //   ...testEntries[idToUpdate - 1],
+      //   ...updateEntry
+      // }
+      return supertest(app)
+          .patch(`/api/entries/${idToUpdate}`)
+          .send(updateEntry)
+          .expect(204)
+      })
+    })
+  })
 })

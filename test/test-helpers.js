@@ -42,7 +42,8 @@ function makeEntriesArray(users) {
             farm: 'Farm 1',
             user_id: users[0].id,
             date_created: new Date('2029-01-22T16:28:32.615Z'),
-            note: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non.Adipisci, pariatur.Molestiae, libero esse hic adipisci autem neque ?',
+            note: 'Molestiae, libero esse hic adipisci autem neque ?',
+            likes: 2,
             rating: 1
         },
         {
@@ -51,7 +52,8 @@ function makeEntriesArray(users) {
             farm: 'Farm 2',
             user_id: users[1].id,
             date_created: new Date('2029-01-22T16:28:32.615Z'),
-            note: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non.Adipisci, pariatur.Molestiae, libero esse hic adipisci autem neque ?',
+            note: 'Molestiae, libero esse hic adipisci autem neque ?',
+            likes: 2,
             rating: 1
         },
         {
@@ -60,7 +62,8 @@ function makeEntriesArray(users) {
             farm: 'Farm 3',
             user_id: users[2].id,
             date_created: new Date('2029-01-22T16:28:32.615Z'),
-            note: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non.Adipisci, pariatur.Molestiae, libero esse hic adipisci autem neque ?',
+            note: 'Molestiae, libero esse hic adipisci autem neque ?',
+            likes: 2,
             rating: 3
         },
         {
@@ -69,7 +72,8 @@ function makeEntriesArray(users) {
             farm: 'Farm 4',
             user_id: users[3].id,
             date_created: new Date('2029-01-22T16:28:32.615Z'),
-            note: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non.Adipisci, pariatur.Molestiae, libero esse hic adipisci autem neque ?',
+            note: 'Molestiae, libero esse hic adipisci autem neque ?',
+            likes: 2,
             rating: 2
         },
     ]
@@ -92,6 +96,8 @@ function makeExpectedEntry(users, entry) {
         rating: entry.rating,
         note: entry.note,
         date_created: '2029-01-22T16:28:32.615Z',
+        likes: entry.likes,
+        user_id: entry.user_id
     }
 }
 
@@ -121,7 +127,6 @@ function seedEntriesTables(db, users, entries) {
     return db.transaction(async trx => {
         await seedUsers(trx, users)
         await trx.into('entries').insert(entries)
-
     })
 }
 

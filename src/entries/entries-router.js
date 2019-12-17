@@ -18,7 +18,7 @@ entriesRouter
 entriesRouter
     .route('/:entry_id')
     .all(checkEntryExists)
-    .get((req, res) => { 
+    .get((req, res, next) => { 
         res.json(res.entry)
     })
     .delete((req, res, next) => {
