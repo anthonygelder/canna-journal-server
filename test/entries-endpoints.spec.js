@@ -43,6 +43,7 @@ describe('Entries endpoint', function() {
       })
 
       it(`responds with 200 and all entries`, () => {
+        // const expectedEntries = testEntries
         const expectedEntries = testEntries.map(entry =>
           helpers.makeExpectedEntry(
             testUsers,
@@ -91,7 +92,6 @@ describe('Entries endpoint', function() {
 
   describe(`POST /api/entries`, () => {
     context('insert new entry into db', () => {
-
       beforeEach(`insert entries`, () => {
         helpers.seedEntriesTables(
           db,

@@ -1,26 +1,36 @@
-# Express Boilerplate!
+# Canna Journal
 
-This is a boilerplate project used for starting new projects!
+## Live Link
+https://canna-journal.anthonygelder.now.sh
 
-## Set up
+## Documentation 
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+### Entries
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+#### Get all entries
+GET https://fierce-sierra-81800.herokuapp.com/api/entries
 
-## Scripts
+#### Get one entry
+GET https://fierce-sierra-81800.herokuapp.com/api/entries/:entry_id
 
-Start the application `npm start`
+#### Delete one entry
+DELETE https://fierce-sierra-81800.herokuapp.com/api/entries/:entry_id
 
-Start nodemon for the application `npm run dev`
+#### Update one entry
+PATCH https://fierce-sierra-81800.herokuapp.com/api/entries/:entry_id
 
-Run the tests `npm test`
+## Summary
+When you walk into a cannabis store, it is often over whelming. There are so many options. It's hard to remember what products you have tried and what you haven't. With Canna Journal you can record your experiences with each product and give it a rating. You can then use this data to help you make decisions next time you go to the store.
 
-## Deploying
+## Screen shots
+![Home Screen](src/img/screenshot1.png)
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+![Add Screen](src/img/screenshot2.png)
+
+![Detail Screen](src/img/screenshot3.png)
+
+## Tech
+React
+Node
+Express
+Postgres
