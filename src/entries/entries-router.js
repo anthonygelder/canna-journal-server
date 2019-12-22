@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const EntriesService = require('./entries-service')
+const { requireAuth } = require('../middleware/jwt-auth')
 const entriesRouter = express.Router()
 const jsonBodyParser = express.json()
 
@@ -17,6 +18,7 @@ entriesRouter
 
 entriesRouter
     .route('/:entry_id')
+    .all(requireAuth)
     .all(checkEntryExists)
     .get((req, res, next) => { 
         res.json(res.entry)
@@ -55,6 +57,7 @@ entriesRouter
 
 entriesRouter
     .route('/')
+    .all(requireAuth)
     .post(jsonBodyParser, (req, res, next) => {
         const newEntry = req.body
 
