@@ -18,7 +18,6 @@ entriesRouter
 
 entriesRouter
     .route('/:entry_id')
-    .all(requireAuth)
     .all(checkEntryExists)
     .get((req, res, next) => { 
         res.json(res.entry)
@@ -57,7 +56,6 @@ entriesRouter
 
 entriesRouter
     .route('/')
-    .all(requireAuth)
     .post(jsonBodyParser, (req, res, next) => {
         const newEntry = req.body
 
