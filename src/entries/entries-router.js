@@ -62,10 +62,13 @@ entriesRouter
         const newEntry = req.body
 
         for (const [key, value] of Object.entries(newEntry))
-        if (value == null)
+        if (value == null) {
             return res.status(400).json({
                 error: `Missing '${key}' in request body`
             })
+        }
+
+        nerEntry.user_id = req.user.id
 
         EntriesService.insertEntry(
             req.app.get('db'),

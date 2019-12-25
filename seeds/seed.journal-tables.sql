@@ -7,12 +7,12 @@ TRUNCATE
 
 INSERT INTO users (user_name, full_name, password)
 VALUES
-    ('dunder', 'Dunder Mifflin', 'password'),
-    ('b.deboop', 'Bodeep Deboop', 'password'),
-    ('c.bloggs', 'Charlie Bloggs', 'password'),
-    ('s.smith', 'Sam Smith', 'password'),
-    ('lexlor', 'Alex Taylor', 'password'),
-    ('wippy', 'Ping Won In', 'password');
+    ('dunder', 'Dunder Mifflin', '$2a$12$HYdQZ7.h.I2NNOsvOlK2EeRVeIgCeqYNYZK.jh3R4YhnUbvkp8rqG'),
+    ('b.deboop', 'Bodeep Deboop', '$2a$12$4Km.6gaMo7slBdw7m2Tf/exSy0KgtosAVEd7rEXTuwWK09mPyww9y'),
+    ('c.bloggs', 'Charlie Bloggs', '$2a$12$E37PVZ1yoZVbb6Qlmc3Lc.5UPcRKkUwBSFGrhRS68j2CoGk75io9C'),
+    ('s.smith', 'Sam Smith', '$2a$12$bVYimdw4HHGWF7O7GTRUEOtcg5e45MKYNnuuVNopg4vgBSi8IHQ3e'),
+    ('lexlor', 'Alex Taylor', '$2a$12$YgkIqB4IjmcjyWQa.ETetuV88R9JYop89k5kbXg2O/4dIP6R6Lo.W'),
+    ('wippy', 'Ping Won In', '$2a$12$n4UKL.1cqepQcFunBk0vdeF061TkVmSiOSix7jCYHITI49dq6t2eO');
 
 INSERT INTO entries (strain, farm, rating, user_id)
 VALUES

@@ -127,6 +127,10 @@ function seedEntriesTables(db, users, entries) {
     return db.transaction(async trx => {
         await seedUsers(trx, users)
         await trx.into('entries').insert(entries)
+        await trx.raw(
+          `SELECT setval('entries_id_seq', ?)`,
+          [entries[entries.length - 1].id],
+        )
     })
 }
 
